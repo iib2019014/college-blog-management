@@ -1,0 +1,51 @@
+@import url(./globals.css);
+@import url(./variables.css);
+
+.site-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-header {
+    height: var(--site-header-height);
+    /* text-align: center; */
+    color: var(--clr-primary-200);
+    background-color: var(--clr-primary-700);
+
+    font-family: var(--font-primary);
+}
+
+.home-div {
+    min-height: var(--site-main-height);
+    color: var(--clr-primary-700);
+    background-color: var(--clr-primary-100);
+
+    font-family: var(--font-primary);
+
+    padding: 1rem;
+
+}
+
+.blogs-div {
+    min-height: var(--site-main-height);
+    color: var(--clr-primary-700);
+    background-color: var(--clr-primary-100);
+
+
+    font-family: var(--font-primary);
+
+}
+
+.card {
+    margin: .5rem 0;
+}
+
+.create-post-form {
+    width: 50%;
+    margin: auto;
+}
+
+.create-post-form .form-group {
+    margin: 0 0 .5rem 0;
+}

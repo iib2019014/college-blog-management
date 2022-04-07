@@ -1,0 +1,16 @@
+<%- include ('partials/header.ejs') -%>
+
+<div class="container-fluid home-div">
+    <div class="create-post-form">
+        <form action="/blog/edit/<%= blog.id %>" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" name="title" placeholder="title" value="<%= blog.title %>">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="body" placeholder="body"><%= blog.body %></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block col-12">CONFIRM</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<%- include ('partials/header.ejs') -%>
+
+<div class="container-fluid home-div">
+    <% blogs.forEach((blog) => { %>
+        <div class="card">
+            <h5 class="card-header"><%= blog.title %></h5>
+            <div class="card-body">
+                <!-- <h5 class="card-title">Special title treatment</h5> -->
+                <p class="card-text"><%= blog.body %></p>
+                <a href="/blog/edit/<%= blog.id %>" class="btn btn-primary">Edit Blog</a>
+                <a href="/blog/delete/<%= blog.id %>" class="btn btn-danger">Delete Blog</a>
+            </div>
+        </div>
+    <% }) %>
+</div>
