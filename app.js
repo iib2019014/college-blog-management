@@ -11,9 +11,21 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyparser.urlencoded({ extended: true }));
 
-// mongoose.connect('mongodb://127.0.0.1:27017').then(() => {
-//     console.log("connected to database");
-// })
+mongoose.connect('mongodb://127.0.0.1:27017').then(() => {
+    console.log("connected to database");
+})
+
+
+let blogSchema = new mongoose.Schema({
+    title: String,
+    body: String,
+    created_date: {
+        type: Date,
+        default: Date.now,
+    }
+})
+
+let blogModel = mongoose.model('Blog', blogSchema)
 
 // let data = [ 'blog1', 'blog2', 'blog3', 'blog4' ];
 
@@ -26,11 +38,11 @@ app.get('/', (req, res) => {
 
 
 // get the blogs data and render blogs.ejs
-app.get('/blogs', (req, res) => {
-let     context = {};
-    context['blogs'] = data;
-    // res.send("Hello World. This is my first app with tech stack (NodeJS, Express, JS)");
+app.get('/blogs', async(req, res) => {
+    let context = {};
 
+    let blogs = await blogModel.find({});
+    context['blogs'] = blogs;
     res.render('blogs', context);
 })
 
@@ -43,87 +55,87 @@ app.get('/blog/new', (req, res) => {
 })
 
 // posting the new blog data,
-app.post('/blog/new', (req, res) => {
+app.post('/blog/new', async(req, res) => {
     console.log("in POST blog");
     
     let context = {};
-    console.log(req.body);
-
-    let {title, body} = req.body;
-
-    console.log("title - " + title, "body - " + body);
 
 
-    let newblog = {
-        id: next_id.toString(),
-        title: title,
-        body: body,
-    };
+    try {
+        let blog = await blogModel.create(req.body);
+        context['blogs'] = data;
+        res.redirect('/blogs');
+    }
 
-    data.push(newblog);
-
-    console.log(newblog.id, newblog.title, newblog.body);
-
-    next_id++;
-
-    context['blogs'] = data;
-    res.redirect('/blogs');
+    catch {
+        res.redirect('/blogs');
+    }
 })
 
 
-// render the editPost page with id as a query param,
-app.get('/blog/edit/:id', (req, res) => {
-    let id = req.params.id;
+// render the editPost page with _id as a query param,
+app.get('/blog/edit/:_id', async(req, res) => {
 
-    let filtered_blogs = data.filter((blog) => blog.id === id);
-    console.log(filtered_blogs);
+    try {
+        let context = {};
+        
+        console.log("req.params._id: " + req.params._id);
+        let filtered_blogs = await blogModel.find({
+            _id: req.params._id,
+        });
 
-    let context = {};
-    context['blog'] = filtered_blogs[0];
+        context['blog'] = filtered_blogs[0];
 
-    res.render('editPost', context);
+        res.render('editPost', context);
+    }
+
+    catch {
+
+    }
 });
 
 
-app.post('/blog/edit/:id', (req, res) => {
-    let id = req.params.id;
-    let {title, body} = req.body;
-    console.log("New values");
-    console.log(title, body);
-
-    let filtered_blogs = data.filter((blog) => blog.id === id);
-    // console.log(filtered_blogs);
-
-    filtered_blogs[0].title = title;
-    filtered_blogs[0].body = body;
-
-    // res.redirect('/blogs/edit/' + id.toString());
-    res.redirect('/blogs');
-})
-
-app.get('/blog/delete/:id', (req, res) => {
-    let id = req.params.id;
-
-    let filtered_blogs = data.filter((blog) => blog.id === id);
-    console.log(filtered_blogs);
-
-    let context = {};
-    context['blog'] = filtered_blogs[0];
-
-    res.render('deletePost', context);
-})
-
-app.post('/blog/delete/:id', (req, res) => {
-    let id = req.params.id;
-
-    for (let i = 0; i < data.length; i++) {
-        if(data[i].id === id) {
-            data.splice(i, 1);
-            break;
-        }
+app.post('/blog/edit/:_id', async(req, res) => {
+    try {
+        // await blogModel.findByIdAndUpdate(req.params._id, body: req.body);
+        await blogModel.findByIdAndUpdate(req.params._id, req.body);
+        res.redirect('/blogs');
     }
 
-    res.redirect('/blogs');
+    catch {
+
+    }
+})
+
+app.get('/blog/delete/:_id', async(req, res) => {
+
+    try {
+        let context = {};
+
+        let filtered_blogs = await blogModel.find({
+            _id: req.params._id,
+        })
+
+        context['blog'] = filtered_blogs[0];
+        res.render('deletePost', context);
+    }
+
+    catch {
+
+    }
+})
+
+app.post('/blog/delete/:_id', async(req, res) => {
+
+    try {
+        await blogModel.findByIdAndDelete(req.params._id);
+
+        res.redirect('/blogs');
+    }
+
+    catch {
+
+    }
 })
 
 app.listen(3001, () => {
