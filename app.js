@@ -38,70 +38,17 @@ app.use('/blogs', blogRouter);
 // posting the new blog data,
 
 
+
 // render the editPost page with _id as a query param,
-app.get('/blog/edit/:_id', async(req, res) => {
 
-    try {
-        let context = {};
-        
-        console.log("req.params._id: " + req.params._id);
-        let filtered_blogs = await blogModel.find({
-            _id: req.params._id,
-        });
-
-        context['blog'] = filtered_blogs[0];
-
-        res.render('editPost', context);
-    }
-
-    catch {
-
-    }
-});
+// posting the edited blog,
 
 
-app.post('/blog/edit/:_id', async(req, res) => {
-    try {
-        // await blogModel.findByIdAndUpdate(req.params._id, body: req.body);
-        await blogModel.findByIdAndUpdate(req.params._id, req.body);
-        res.redirect('/blogs');
-    }
 
-    catch {
+// render the deletePost page with _id as a query param,
 
-    }
-})
+// posting the deleted blog,
 
-app.get('/blog/delete/:_id', async(req, res) => {
-
-    try {
-        let context = {};
-
-        let filtered_blogs = await blogModel.find({
-            _id: req.params._id,
-        })
-
-        context['blog'] = filtered_blogs[0];
-        res.render('deletePost', context);
-    }
-
-    catch {
-
-    }
-})
-
-app.post('/blog/delete/:_id', async(req, res) => {
-
-    try {
-        await blogModel.findByIdAndDelete(req.params._id);
-
-        res.redirect('/blogs');
-    }
-
-    catch {
-
-    }
-})
 
 app.listen(3001, () => {
     console.log("listening on port 3001");
