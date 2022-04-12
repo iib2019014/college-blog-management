@@ -1,3 +1,6 @@
+@import url(./globals.css);
+@import url(./variables.css);
+
 * {
     margin: 0;
     padding: 0;
@@ -8,4 +11,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.btn-primary {
+    background-color: var(--clr-primary-700);
+    border: none;
+
+    transition: all .5s;
+}
+
+.btn-danger {
+    background-color: var(--clr-grey-800);
+    border: none;
+
+    transition: all .5s;
+}
+
+.btn-primary:hover {
+    color: var(--clr-primary-700);
+    background-color: white;
+}
+
+.btn-danger:hover {
+    color: var(--clr-grey-800);
+    background-color: white;
 }

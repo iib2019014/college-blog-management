@@ -4,30 +4,22 @@ const data = require('./data').data;
 let next_id = require('./data').next_id;
 const bodyparser = require('body-parser');
 
+
+const {
+    blogModel,
+} = require('./models/blog');
+
+
+const {
+    blogRouter,
+} = require('./routes/blog');
+
 const app = express();
 
 app.set('view engine', 'ejs');
 // app.engine('ejs', require('ejs').__express);
 app.use(express.static('public'));
 app.use(bodyparser.urlencoded({ extended: true }));
-
-mongoose.connect('mongodb://127.0.0.1:27017').then(() => {
-    console.log("connected to database");
-})
-
-
-let blogSchema = new mongoose.Schema({
-    title: String,
-    body: String,
-    created_date: {
-        type: Date,
-        default: Date.now,
-    }
-})
-
-let blogModel = mongoose.model('Blog', blogSchema)
-
-// let data = [ 'blog1', 'blog2', 'blog3', 'blog4' ];
 
 
 
@@ -38,39 +30,12 @@ app.get('/', (req, res) => {
 
 
 // get the blogs data and render blogs.ejs
-app.get('/blogs', async(req, res) => {
-    let context = {};
-
-    let blogs = await blogModel.find({});
-    context['blogs'] = blogs;
-    res.render('blogs', context);
-})
+app.use('/blogs', blogRouter);
 
 
 // render the createPost page
-app.get('/blog/new', (req, res) => {
-    let context = {};
-    console.log("to createPost");
-    res.render('createPost', context);
-})
 
 // posting the new blog data,
-app.post('/blog/new', async(req, res) => {
-    console.log("in POST blog");
-    
-    let context = {};
-
-
-    try {
-        let blog = await blogModel.create(req.body);
-        context['blogs'] = data;
-        res.redirect('/blogs');
-    }
-
-    catch {
-        res.redirect('/blogs');
-    }
-})
 
 
 // render the editPost page with _id as a query param,
