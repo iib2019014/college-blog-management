@@ -1,0 +1,46 @@
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, var(--clr-primary-500), var(--clr-primary-700));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, var(--clr-primary-500), var(--clr-primary-700));
+}
+
+.gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, var(--clr-primary-500), var(--clr-primary-700));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, var(--clr-primary-500), var(--clr-primary-700));
+}
+
+
+.sign-in-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.sign-up-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50rem;
+
+    margin: auto;
+
+
+    border-radius: 15px;
+}
+
+.sign-up-btn > .btn-success {
+    color: white;
+}

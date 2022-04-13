@@ -1,6 +1,48 @@
 <%- include ('partials/header.ejs') -%>
 
 
-<div class="container-fluid home-div">
-    Sign Up Form
-</div>
+    <div class="container-fluid home-div sign-in-div">
+        <div class="sign-up-form gradient-custom-3">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+                    <h2 class="text-uppercase text-center mb-3">Create an account</h2>
+
+                    <form>
+
+                        <div class="form-outline mb-1">
+                            <input type="text" id="form3Example1cg" class="form-control form-control-lg name="name" />
+                            <label class="form-label" for="form3Example1cg">Your Name</label>
+                        </div>
+
+                        <div class="form-outline mb-1">
+                            <input type="text" id="form3Example1cg" class="form-control form-control-lg name="username" />
+                            <label class="form-label" for="form3Example1cg">Username</label>
+                        </div>
+
+                        <div class="form-outline mb-1">
+                            <input type="email" id="form3Example3cg" class="form-control form-control-lg name="email" />
+                            <label class="form-label" for="form3Example3cg">Your Email</label>
+                        </div>
+
+                        <div class="form-outline mb-1">
+                            <input type="password" id="form3Example4cg" class="form-control form-control-lg name="department" />
+                            <label class="form-label" for="form3Example4cg">Department</label>
+                        </div>
+
+                        <div class="form-outline mb-1">
+                            <input type="password" id="form3Example4cdg" class="form-control form-control-lg name="password" />
+                            <label class="form-label" for="form3Example4cdg">Password</label>
+                        </div>
+
+                        <div class="sign-up-btn d-flex justify-content-center" style="color: white;">
+                            <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                        </div>
+
+                        <p class="text-center text-muted mt-5 mb-0">Have an account already? <a href="/users/signin" class="fw-bold text-body"><u>Login here</u></a></p>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
