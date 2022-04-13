@@ -32,21 +32,48 @@ const getLoginUser = async (req, res) => {
 
 
 const postCreateUser = async (req, res) => {
-    let {
-        name,
-        username,
-        email,
-        department,
-        password,
-    } = req.body;
+    try {
+        let {
+            name,
+            username,
+            email,
+            department,
+            password,
+        } = req.body;
+
+        // console.log(req.body);
+
+
+        let salt = await genSalt();
+        let hashed = await hash(password, salt);
+
+
+        console.log("salt : ", salt, "hashed : ", hashed);
+
+        password = hashed;
+
+        await userModel.create({
+            name,
+            username,
+            email,
+            department,
+            password,
+        });
+
+        res.send("User Created");
+    }
+
+    catch (err) {
+        console.log(err);
+    }
+    
+
+
 }
 
 const postLoginUser = async (req, res) => {
     let {
-        name,
         username,
-        email,
-        department,
         password,
     } = req.body;
 }
