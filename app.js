@@ -14,12 +14,24 @@ const {
     blogRouter,
 } = require('./routes/blog');
 
+
+const {
+    userRouter,
+} = require('./routes/user');
+
+
 const app = express();
 
 app.set('view engine', 'ejs');
 // app.engine('ejs', require('ejs').__express);
 app.use(express.static('public'));
 app.use(bodyparser.urlencoded({ extended: true }));
+
+
+mongoose.connect('mongodb://127.0.0.1:27017').then(() => {
+    console.log("connected to database");
+})
+
 
 
 
@@ -31,6 +43,8 @@ app.get('/', (req, res) => {
 
 // get the blogs data and render blogs.ejs
 app.use('/blogs', blogRouter);
+
+app.use('/users', userRouter);
 
 
 // render the createPost page
