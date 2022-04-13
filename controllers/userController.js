@@ -26,6 +26,11 @@ const getLoginUser = async (req, res) => {
     }
 }
 
+
+
+
+
+
 const postCreateUser = async (req, res) => {
     let {
         name,
@@ -50,5 +55,7 @@ const postLoginUser = async (req, res) => {
 module.exports = {
     getCreateUser,
     postCreateUser,
+    getLoginUser,
+    postLoginUser,
 }
 
