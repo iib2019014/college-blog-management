@@ -12,8 +12,13 @@ const {
 } = require('../controllers/blogController');
 
 
+const {
+    authenticateToken,
+} = require('../controllers/userController');
 
-blogRouter.get('/', getBlogs);
+
+
+blogRouter.get('/', authenticateToken, getBlogs);
 blogRouter.get('/new', getNewBlog);
 blogRouter.get('/edit/:_id', getEditBlog);
 blogRouter.get('/delete/:_id', getDeleteBlog);

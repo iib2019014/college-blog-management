@@ -9,18 +9,23 @@
 
                     <form action="/users/signin" method="POST">
 
-                        <div class="form-outline mb-1">
+                        <!-- <div class="form-outline mb-1">
                             <input type="text" id="form3Example1cg" class="form-control form-control-lg name="username" />
                             <label class="form-label" for="form3Example1cg">Username</label>
+                        </div> -->
+
+                        <div class="form-outline mb-1">
+                            <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email" />
+                            <label class="form-label" for="form3Example3cg">Your Email</label>
                         </div>
 
                         <div class="form-outline mb-1">
-                            <input type="password" id="form3Example4cdg" class="form-control form-control-lg name="password" />
+                            <input type="password" id="form3Example4cdg" class="form-control form-control-lg" name="password" />
                             <label class="form-label" for="form3Example4cdg">Password</label>
                         </div>
 
                         <div class="sign-up-btn d-flex justify-content-center" style="color: white;">
-                            <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                            <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                         </div>
 
                         <p class="text-center text-muted mt-5 mb-0">Not created an account yet? <a href="/users/signup" class="fw-bold text-body"><u>Sign up here</u></a></p>

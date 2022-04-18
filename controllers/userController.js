@@ -1,3 +1,6 @@
+const { compare } = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const {
     hash,
     genSalt,
@@ -72,10 +75,81 @@ const postCreateUser = async (req, res) => {
 }
 
 const postLoginUser = async (req, res) => {
-    let {
-        username,
-        password,
-    } = req.body;
+    try {
+        let {
+            // username,
+            email,
+            password,
+        } = req.body;
+
+        console.log(email, password);
+    
+    
+        let req_user = await userModel.findOne({
+            email,
+        })  // returns only one element,
+        
+        console.log("req_user : ", req_user);
+    
+    
+        if(!req_user) {
+            console.log("User Not Found");
+        }
+        
+        console.log("User found");
+        console.log(password, req_user.password);
+        if(await compare(password, req_user.password)) {
+            let loggedUser = {
+                email,
+                name: req_user.name,
+                username: req_user.username,
+                department: req_user.department,
+            }
+    
+            const token = await jwt.sign(loggedUser, "secret_key", {expiresIn: "15s"})
+            console.log("Credentials authenticated");
+        }
+        
+        else {
+            console.log("Invalid credentials");
+        }
+
+
+        // res.render()
+    }
+
+    catch (err) {
+        console.log(err);
+    }
+}
+
+
+
+const authenticateToken = async (req, res, next) => {
+    try {
+        const token = req.headers["authorization"];
+
+        if (token == null) {
+            res.send("Please log in");
+        }
+
+
+        let loggedUser = jwt.verify(token, "secret_key");
+
+        if(!loggedUser) {
+            res.send("Please log in(not verified)");
+        }
+
+        req.loggedUser = loggedUser;
+
+        console.log(loggedUser);
+
+        next();
+    }
+
+    catch (err) {
+        console.log(err);
+    }
 }
 
 
@@ -84,5 +158,6 @@ module.exports = {
     postCreateUser,
     getLoginUser,
     postLoginUser,
+    authenticateToken,
 }
 

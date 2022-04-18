@@ -11,6 +11,8 @@ const getBlogs = async (req, res) => {
 
         // console.log(blogs);
 
+        console.log("loggedUser : ", req.loggedUser);
+
         let context = {};
 
         context['blogs'] = blogs;
