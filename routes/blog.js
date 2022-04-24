@@ -18,7 +18,7 @@ const {
 
 
 
-blogRouter.get('/', authenticateToken, getBlogs);
+blogRouter.get('/', getBlogs);
 blogRouter.get('/new', getNewBlog);
 blogRouter.get('/edit/:_id', getEditBlog);
 blogRouter.get('/delete/:_id', getDeleteBlog);

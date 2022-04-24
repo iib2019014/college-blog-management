@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const data = require('./data').data;
 let next_id = require('./data').next_id;
 const bodyparser = require('body-parser');
+// const 
 
 
 const {
@@ -18,9 +19,18 @@ const {
 const {
     userRouter,
 } = require('./routes/user');
+const session = require('express-session');
 
 
 const app = express();
+
+
+app.use(session({
+    secret: 'secret_key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {  },
+}))
 
 app.set('view engine', 'ejs');
 // app.engine('ejs', require('ejs').__express);

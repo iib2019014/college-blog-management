@@ -11,7 +11,9 @@ const getBlogs = async (req, res) => {
 
         // console.log(blogs);
 
-        console.log("loggedUser : ", req.loggedUser);
+        console.log("req.session.token ", req.session.token);
+
+        console.log("loggedUser : ", req.session.loggedUser);
 
         let context = {};
 

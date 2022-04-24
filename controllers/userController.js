@@ -107,7 +107,16 @@ const postLoginUser = async (req, res) => {
             }
     
             const token = await jwt.sign(loggedUser, "secret_key", {expiresIn: "15s"})
+            // we need to send this token to authenticateToken().
+            
+
+            res.locals.token = token;
+            // now we can use token jst by typing 'token' in  the rendered ejs files,
+
+            req.session.token = token;
+            req.session.loggedUser = loggedUser;
             console.log("Credentials authenticated");
+            res.redirect('/blogs')
         }
         
         else {
@@ -115,7 +124,7 @@ const postLoginUser = async (req, res) => {
         }
 
 
-        // res.render()
+        res.send("user logged in");
     }
 
     catch (err) {
@@ -153,11 +162,18 @@ const authenticateToken = async (req, res, next) => {
 }
 
 
+
+const shareToken = async (req, res, next) => {
+    
+}
+
+
 module.exports = {
     getCreateUser,
     postCreateUser,
     getLoginUser,
     postLoginUser,
     authenticateToken,
+    shareToken,
 }
 

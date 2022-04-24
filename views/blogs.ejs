@@ -1,15 +1,31 @@
 <%- include ('partials/header.ejs') -%>
 
-<div class="container-fluid home-div">
-    <% blogs.forEach((blog) => { %>
-        <div class="card">
-            <h5 class="card-header"><%= blog.title %></h5>
-            <div class="card-body">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <p class="card-text"><%= blog.body %></p>
-                <a href="/blogs/edit/<%= blog._id %>" class="btn btn-primary">Edit Blog</a>
-                <a href="/blogs/delete/<%= blog._id %>" class="btn btn-danger">Delete Blog</a>
+    <div class="container-fluid home-div">
+        <% blogs.forEach((blog)=> { %>
+            <div class="card">
+                <div class="card-header-div">
+                    <h5 class="card-header">
+                        <%= blog.title %>
+                    </h5>
+                    <div class="upvote-div">
+                        <i class="fa-solid fa-arrow-up upvote"></i>
+                    </div>
+                    <div class="downvote-div">
+                        <i class="fa-solid fa-arrow-down downvote"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                    <p class="card-text">
+                        <%= blog.body %>
+                    </p>
+                    <a href="/blogs/edit/<%= blog._id %>" class="btn btn-primary">Edit Blog</a>
+                    <a href="/blogs/delete/<%= blog._id %>" class="btn btn-danger">Delete Blog</a>
+                </div>
             </div>
-        </div>
-    <% }) %>
-</div>
+            <% }) %>
+    </div>
+
+
+
+    <script src="/js/index.js"></script>

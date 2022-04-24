@@ -1,0 +1,32 @@
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulsate-vote {
+    animation: pulsate .5s ease-in-out forwards;
+}
+
+@keyframes un-pulsate {
+    0% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.un-pulsate-vote {
+    animation: un-pulsate .5s;
+}

@@ -7,6 +7,49 @@
     align-items: center;
 }
 
+
+.card-header-div {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0,0,0,.03);
+}
+
+.card-header {
+    flex: 3;
+}
+
+.upvote-div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: scale(2); */
+}
+
+.upvote {
+    color: var(--clr-primary-700);
+    font-size: 1.5rem;
+    cursor: pointer;
+    /* transform: scale(2); */
+}
+
+.downvote {
+    color: var(--clr-grey-800);
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    /* transform: scale(2); */
+}
+
+
+
+.downvote-div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .site-header {
     height: var(--site-header-height);
     /* text-align: center; */
